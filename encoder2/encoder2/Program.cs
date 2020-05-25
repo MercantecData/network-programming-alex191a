@@ -29,6 +29,7 @@ namespace encoding
                 string messageRecieve = Encoding.UTF8.GetString(buffersize, 0, nbytesRead);
                 Console.WriteLine(messageRecieve);
                 listener.Stop();
+
             }
             void Client()
             {
@@ -47,7 +48,7 @@ namespace encoding
             bool die = true;
             while (die)
             {
-                Console.WriteLine("Indtast 1 for at skrive besked.\n Indtast 2 for at hente besked.\n indtast 3 for begge");
+                Console.WriteLine("Indtast 1 for at skrive besked.\n Indtast 2 for at hente besked");
                 string reader = Console.ReadLine();
                 while (int.TryParse(reader, out int value))
                 {
@@ -58,9 +59,6 @@ namespace encoding
                     else if (Convert.ToInt32(reader) == 2)
                     {
                         Server();
-                    }
-                    else if (Convert.ToInt32(reader) == 3)
-                    {
 
                     }
                 }
