@@ -9,27 +9,10 @@ using System.Runtime.Remoting.Channels;
 using System.IO;
 using System.Security;
 
-namespace server
+namespace encoding
 {
     class server
     {
-        static void Main()
-        {
-            bool conn = true;
-            while (conn)
-            {
-                server program = new server();
-                Console.WriteLine("vil du lukke?: 1");
-                string input = Console.ReadLine();
-                if (int.TryParse(input, out int value))
-                {
-                    if (Convert.ToInt32(input) == 1)
-                    {
-                        conn = false;
-                    }
-                }
-            }
-        }
         public server()
         {
             bool conn = true;
@@ -39,12 +22,12 @@ namespace server
 
             TcpListener listener = new TcpListener(localendpoint);
             listener.Start();
- 
-                Console.WriteLine("leder efter potientel klient");
-                TcpClient client = listener.AcceptTcpClient();
 
-                NetworkStream stream = client.GetStream();
-                ReceiveMessages(stream);
+            Console.WriteLine("leder efter potientel klient");
+            TcpClient client = listener.AcceptTcpClient();
+
+            NetworkStream stream = client.GetStream();
+            ReceiveMessages(stream);
             while (conn)
             {
 

@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dictonary.cs" />
     <Compile Include="Smethods.cs" />
     <Compile Include="server.cs" />
     <Compile Include="client.cs" />

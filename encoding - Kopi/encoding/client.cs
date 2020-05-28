@@ -8,24 +8,10 @@ using System.Net.Sockets;
 using System.Runtime.Remoting.Channels;
 using System.IO;
 
-namespace client
+namespace encoding
 {
     class client
     {
-        static void Main()
-        {
-            bool conn = true;
-            client program = new client();
-            Console.WriteLine("vil du lukke?: 1");
-            string input = Console.ReadLine();
-            if (int.TryParse(input, out int value))
-            {
-                if (Convert.ToInt32(input) == 1)
-                {
-                    conn = false;
-                }
-            }
-        }
         public client()
         {
             bool conn = true;
@@ -38,11 +24,11 @@ namespace client
 
             NetworkStream stream = client.GetStream();
             ReceiveMessages(stream);
-            while (conn) 
+            while (conn)
             {
-            Console.WriteLine("Du kan skrive beskeder nu");
-            string besked = Console.ReadLine();
-            byte[] buffersize = Encoding.UTF8.GetBytes(besked);
+                Console.WriteLine("Du kan skrive beskeder nu");
+                string besked = Console.ReadLine();
+                byte[] buffersize = Encoding.UTF8.GetBytes(besked);
                 stream.Write(buffersize, 0, buffersize.Length);
             }
             client.Close();
@@ -59,7 +45,5 @@ namespace client
                 Console.WriteLine("\n" + RM);
             }
         }
-
-
     }
 }
