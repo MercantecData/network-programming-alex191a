@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5F47D186-56CC-48D3-851E-AA5570AD361D}</ProjectGuid>
+    <ProjectGuid>{16FF46E0-E517-406A-A18D-3705284915C2}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>encoder2</RootNamespace>
-    <AssemblyName>encoder2</AssemblyName>
+    <RootNamespace>encoding</RootNamespace>
+    <AssemblyName>encoding</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="..\Program.cs">
+      <Link>Program.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
