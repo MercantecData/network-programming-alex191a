@@ -17,38 +17,20 @@ namespace encoding
         {
             bool conn = true;
             int port = 5001;
+            Smethods smethod = new Smethods();
+            smethod.serverInfo(port);
+
             IPAddress ip = IPAddress.Any;
             IPEndPoint localendpoint = new IPEndPoint(ip, port);
 
             TcpListener listener = new TcpListener(localendpoint);
             listener.Start();
-
             Console.WriteLine("leder efter potientel klient");
-            TcpClient client = listener.AcceptTcpClient();
-
-            NetworkStream stream = client.GetStream();
-            ReceiveMessages(stream);
+            smethod.acceptconn(listener);
+            Console.WriteLine("Skriv din besked");
             while (conn)
             {
-
-                Console.WriteLine("Skriv din besked");
-                string besked = Console.ReadLine();
-                byte[] buffersize = Encoding.UTF8.GetBytes(besked);
-
-                stream.Write(buffersize, 0, buffersize.Length);
-                Console.ReadKey();
-            }
-        }
-        public async void ReceiveMessages(NetworkStream stream)
-        {
-            bool conn = true;
-            while (conn)
-            {
-                byte[] buffersize = new byte[1000];
-                // number of bytes read
-                int NOBR = await stream.ReadAsync(buffersize, 0, 1000);
-                string RM = Encoding.UTF8.GetString(buffersize, 0, NOBR);
-                Console.WriteLine("\n" + RM);
+                smethod.sMessage();
             }
         }
     }

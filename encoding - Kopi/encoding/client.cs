@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Remoting.Channels;
 using System.IO;
+using System.Runtime.Remoting;
 
 namespace encoding
 {
@@ -16,34 +17,23 @@ namespace encoding
         {
             bool conn = true;
             TcpClient client = new TcpClient();
-            int port = 5000;
-            IPAddress ip = IPAddress.Parse("172.16.112.238");
+            Console.WriteLine("skriv porten. Example: 5001");
+            int port = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("skriv ip'en. \n example: 127.0.0.1");
+            IPAddress ip = IPAddress.Parse(Console.ReadLine());
             IPEndPoint endPoint = new IPEndPoint(ip, port);
 
             client.Connect(endPoint);
 
             NetworkStream stream = client.GetStream();
-            ReceiveMessages(stream);
+            Smethods smethod = new Smethods();
+            smethod.ReceiveMessages(stream);
+            Console.WriteLine("Du kan skrive beskeder nu");
             while (conn)
             {
-                Console.WriteLine("Du kan skrive beskeder nu");
-                string besked = Console.ReadLine();
-                byte[] buffersize = Encoding.UTF8.GetBytes(besked);
-                stream.Write(buffersize, 0, buffersize.Length);
+                smethod.cmessage(stream);
             }
             client.Close();
-        }
-        public async void ReceiveMessages(NetworkStream stream)
-        {
-            bool conn = true;
-            while (conn)
-            {
-                byte[] buffersize = new byte[1000];
-                // number of bytes read
-                int NOBR = await stream.ReadAsync(buffersize, 0, 1000);
-                string RM = Encoding.UTF8.GetString(buffersize, 0, NOBR);
-                Console.WriteLine("\n" + RM);
-            }
         }
     }
 }

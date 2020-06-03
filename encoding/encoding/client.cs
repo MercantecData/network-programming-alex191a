@@ -20,7 +20,7 @@ namespace encoding
             Console.WriteLine("skriv porten. Example: 5001");
             int port = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("skriv ip'en. \n example: 127.0.0.1");
-            IPAddress ip = IPAddress.Parse("172.16.113.68");
+            IPAddress ip = IPAddress.Parse(Console.ReadLine());
             IPEndPoint endPoint = new IPEndPoint(ip, port);
 
             client.Connect(endPoint);

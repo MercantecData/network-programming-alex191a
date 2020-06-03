@@ -24,7 +24,7 @@ namespace encoding
     }
     class Smethods
     {
-        public List<users> userlist = new List<users>();
+        public static List<users> userlist = new List<users>();
 
         public void cmessage(NetworkStream Stream) 
         {
@@ -54,17 +54,22 @@ namespace encoding
                 string RM = Encoding.UTF8.GetString(buffersize, 0, NOBR);
                 if (RM[0] == '/')
                 {
-
+                    dictonary function = new dictonary();
+                    function.dictionayList(brugern, RM);
                 }
+                string brugerens = "";
                 foreach (users bruger in userlist)
                 {
                     if (brugern == bruger.brugere)
                     {
-
-                        byte[] send = Encoding.UTF8.GetBytes(bruger.navne + ": " + RM + "\n");
-                        bruger.brugere.GetStream().Write(send, 0, send.Length);
-                        Console.WriteLine(bruger.navne + ": " + RM + "\n");
+                        brugerens = bruger.navne;
                     }
+                }
+                foreach (users bruger in userlist)
+                {
+                    byte[] send = Encoding.UTF8.GetBytes(brugerens + ": " + RM + "\n");
+                    bruger.brugere.GetStream().Write(send, 0, send.Length);
+                    Console.WriteLine(brugerens + ": " + RM + "\n");
                 }
             }
         }
@@ -113,7 +118,14 @@ namespace encoding
         public void send(NetworkStream stream, string text)
         {
             byte[] send = Encoding.UTF8.GetBytes(text);
-            stream.Write(send, 0, send.Length);
+           stream.Write(send, 0, send.Length);
+        }
+        public string recivingString(NetworkStream stream)
+        {
+            byte[] buffer = new byte[256];
+            int recieving = stream.Read(buffer, 0, 256);
+            string GetText = Encoding.UTF8.GetString(buffer, 0,recieving);
+            return GetText;
         }
     }
 }
